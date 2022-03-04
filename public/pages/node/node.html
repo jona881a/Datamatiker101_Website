@@ -1,0 +1,79 @@
+<div class="row">
+<article>
+  <h2>Introduction to NodeJS</h2>
+  <p>In this section there will be a quick introduction to what NodeJS is and isnt't. What we can do with NodeJS and how we install packages and use them. 
+    furthermore, I will cover everything related to Express. The sections on the site is not necessarily in a chronological order, it is topic based on topics or key words you will encounter while learning NodeJS</p>
+
+  <h3>What is NodeJS? </h3>
+  <p>Well, first of all Nodejs is not a language! it is a intepreter of JavaScript. But how does it intepret JavaScript when the browser usually are the one that can understand JavaScript? 
+    Well, simply by extracting the chromium V8 engine from the browser and wrapping it so Node creates a <strong>runtime</strong> environment that we can run JavaScript in</p>
+
+  <h3>What is a REPL?</h3>
+  <p>REPL stands for Read, eval, print and loop. Every programming langauge has a REPL and the purpose of the REPL are to quickly run code statements (single liners only) by refering to the languages REPL.
+    In Node, the repl can be opened by entering node in the terminal and hitting return. 
+  </p>
+  <img src="/img/node/node/nodeREPL.png">
+  <p>You now have an environment which can run simple JavaScript statements for testing purposes</p>
+
+  <h3>Where do we keep dependencies in Node?</h3>
+  <p>Like any other programming langauge or environment we need packages to make the program functional and to use Node to its full potential, 
+    we of course need to utilize the reason we want JavaScript code in a backend environment.
+  </p>
+  <p>In order to do so, we first and foremost need to define the package.json file and initialize it as json, by adding {} to the document. 
+    secondly, we install a package called express by running the npm command to install it <a href="/node/terminalcommands">here</a>. 
+    This creates a dependency in the package.json file with the latest stable version, which we now can import to our app.js document.
+  </p>
+  <img src="/img/node/node/expressdependency_package.json.png">
+
+  <h4>How do we then import and use libraries in NodeJS?</h4>
+  <p>So now that we have installed express as a Node Module, how do we utilize it? This can be done by stating the <em>require keyword.</em> It looks like this:</p>
+  <p>
+      const express = require("express"); <br>
+      Then we need to use what we just imported:
+      const app = express();
+  </p>
+  <img src="/img/node/node/require_express.png">
+
+  <h3>What are npm?</h3>
+  <p>Node package manager is the equivalent to Java's Maven build tool. Npm is also a build tool, but for NodeJS, almost every programming langauge has a build tool today,
+     the langauges which are backend focused that is.</p>
+  <p>As discussed in earlier section, in order to use npm and install dependencies we need a file called package.json</p>
+  
+  <h4>The Role of package.json</h4>
+  <p>Firstly, we need to initialize the package.json file as a json. This is done by stating {} in the file when it is created</p>
+  <p>We can then run commands to install packages, we can run npm init which sets up your project to be a npm package lik if you were to create a application to be used by others</p>
+  <p>The second thing the package.json can be utilized to do is to keep build steps (as they are called in node) by stating scripts</p>
+  <img src="/img/node/node/npm_init.png">
+
+  <h4>Scripts</h4>
+  <p>In the package.json file we can specifiy scripts that can be run by the npm. 
+    Some common scripts are when we need to run our project in a development env and prodcution env.
+    This is useful when we deploy to Heroku because Heroku needs to use npm to start app.js and if we do not specify it in the scripts part of package.json it won't be able to run the application</p>
+  <img src="/img/node/node/package.json_scripts.png">
+
+  <h3>Livereload server and other dev dependencies</h3>
+  <p>It is always convenient to have a livereload server but node doesn't livereload on its own. So in order to livereload we need to install another package called nodemon, 
+      and this we can do globally so it isn't locally in our development repo. (the command is located <a href="/node/terminalcommands">here).</a>
+  </p>  
+  <p>now that we have installed it we can run the following command: <em>nodemon app.js</em> and if we also want to livereload other files than js like html we can create a file called nodemon.json 
+    and specifiy the following:
+  </p>
+  <img src="/img/node/node/nodemon.json.png">
+  
+  <p>This is what we call a development package due to the fact that it is not really of any use in production or for the consumer to be able to live reload when saving changes to the program. There will not be any changes</p>
+  
+  <h4>How do we install it as a dev dependency?</h4>
+  <p>We install packages as dev dependencies by stating --save-dev after npm install and before the package name, so it will look like this: (picture here)</p>
+  
+  <h4>cross-env </h4>
+  <p>Another useful package to install is cross-env which allows us to use commands to run the environment port on different OS systems without the need to change the commands to suit the system.</p>
+  <p>This command allows us to create a script to start the program on a specific port systematically independent</p>
+  <p>See picture under scripts</p>
+
+  <h3>Importing and exporting Node Modules</h3>
+  <p>We've already discussed how we import modules in node with the require keyword. But we can also create our own modules and export them to be imported in another file.
+    this is used when we need different files to different routs in a large scale NodeJS based backend or fullstack program. We don't like big files, 
+    this makes the code hard to maintain and less readable not to mention High Coherent.
+  </p>
+  <p>Code here COMES LATER</p>
+</article>

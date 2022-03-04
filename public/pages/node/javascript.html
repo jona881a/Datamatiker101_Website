@@ -1,0 +1,109 @@
+<div class="row">
+  <article>
+    <h2>JavaScript Quickguide</h2>
+    <p>On this page we will walk quickly through some good JavaScript principles to avoid codesmell </p>
+
+    <h3>Code smell</h3>
+    <p>Code smell is not a technical fault or bug it is also subjective by language, developer and development methodology.
+      So in other words, codesmell does not make your program bad in a programatic way. It is something subjective to the individual who are looking at the programs source code
+    </p>
+    <p>There will be some talk about specific use cases where we can avoid common codesmell in JavaScript by utilizing the right tools. 
+      This is done in the specific sections bellow.
+    </p>
+
+    <h3>Variables</h3>
+    <p>There are three main ways to declare a variable in JavaScript</p>
+    <ol>
+      <li>var</li>
+      <li>let</li>
+      <li>const</li>
+    </ol>
+    <p>And it was not up until recently that var was the only way to declare a variable in JavaScript, but there was a problem with it: var is only a global scope nad mutable.
+      So the fokes at JavaScript released the const and let to combat the code smell (which var is nowadays) so we now have a const, which can't be reassigned and then we have the let, which can.
+    </p>
+    <p>These types are now scope <em>dependent</em> which means that it matters where you state them. Unlike var, which you could state in a for loop and access outside the scope, 
+      with const and let, you can't </p>
+    <h3>Types</h3>
+    <p>As many other langauges we have different types, primitives as well as datasstructures</p>
+
+    <h4>Type coersion</h4>
+    <p>Type coersion is another bad code smell. Because JavaScript is so freely and unopinionated we can be victims of type coersion.</p>
+    <p>Type coersion are when we unfortunately converts a type into another type without realising it.</p>
+    <p>A common mistake to make when comparing to values like a string which has the number 2 and actually comparing it with 2 is by using two equalsigns only,
+      this invokes type coersion by type converting implicitly and the statement then becomes true. JavaScript inteprets it as a number 2 even though the types doesn't add up. Therefore we always should make it three equal signs to avoid these problems.
+    </p>
+    
+    <h4>Assignment destructuring</h4>
+    <p>In JavaScript we can access an objects keypairs by stating the object.attribute but if there are hundreds of keys and values and we only want certain parts,
+      we can use assignemnt destructuring.
+    </p>
+    <img src="/img/node/javascript/assignment_destructuring_example.png">
+    <p>In the above example we are importing our own exported module where we have a method called calculateAmoutOfCoolDinosaurs like so:</p>
+    <img src="/img/node/javascript/export_example.png">
+    <p>So in the exported module we state the key and the value to the key as the method. So by destructuring we can directly use the method. 
+      Otherwise we would've needed to say const dinosaurcalculation, then dinosaurcalculation.calculateAmountOfCoolDinosaurs as an example.
+    </p>
+    <p>So destructuring is a nice way of accessing the keys and values of the object or module directly</p>
+
+    <h3>Arrays</h3>
+    <p>In this section i will not go deep into arrays and how they work etc. i will quickly state good practice and what methods to use when</p>
+    
+    <h4>Array functions to use</h4>
+    <p>This is a good section to talk about codesmell in. As a quick example we always want to avoid for loops with iterators in JavaScript.</p>
+    <p>This is a common practice in Java but not in JavaScript, because JavaScript is a functional language and Java is a object oriented langauge. So to not use the functions in JavaScript is bad codesmell</p>
+    
+    <strong>Array.forEach</strong>
+    <p>This function usually get used alot when we iterate over elements in an array, but also to alter things in an existing array outside the function scope. This is <strong>bad code smell!</strong></p>
+    <p>Instead, when altering an array we need to return an immutable copy of the array when we are done with the array so the alteration happens with an array which is not outside the block scope</p>
+    <p>The function in question is the Array.map</p>
+    <img src="/img/node/javascript/array.map_example.png">
+    <p>In this example above we need to discount some prices in some objects of smartphones and instead of looping through and changing the prices,
+      we use the map function which returns a copy of the array with the updated prices. In this way we do not alter something outside the function and
+      therefore this code smells good! :-)
+    </p>
+
+    <strong>Array.filter</strong>
+    <p>Another example of a good use of inbuild functions are the array.filter function. This function also returns a new array with elements that are filtered through a predicate</p>
+    <p>Lets take the phones as an example again</p>
+    <img src="/img/node/javascript/array.filter_example.png">
+    <p>As you can se we can also validate that the array we use isn't changed but we return a new array in the expensivePhones variable</p>
+    <p>The filter method takes the predicate that we want only the phones which are lower or equal to the price of 4000</p>
+
+    <p>Also notice that both functions operate using a lambda function, this is discussed under functions section</p>
+
+    <h3>Functions</h3>
+    <p>JavaScript are a function based language, it was only recently that objects and classes where added to JavaScript and many developers don't like to use classes in JavaScript</p>
+    <h4>Different ways of declaring functions</h4>
+    <p>There are 3 differnet ways to declare functions in JavaScript</p>
+    <ol>
+      <li>function</li>
+      <img src="/img/node/javascript/function_example.png">
+      <p>Here we simply just write function(parameters if any) {}</p>
+      <li>Annonymous function</li>
+      <img src="/img/node/javascript/annonymous_function_example.png">
+      <p>The annonymous function are when we store the function in a variable and call it with parenthetes, hence the annonymous part of the function</p>
+      <li>Lambda function (also called arrowfunction)</li>
+      <img src="/img/node/javascript/lambda_function_example.png">
+      <p>The lambda function, also called arrow funciton, uses lambda notation (hence the name) and points to the content or the logic of the function</p>
+      <p>This is the most important or the most used of the three due to the fact that it also goes as a callback function usually (the syntax is always the one of the lambda function)</p>
+    </ol>
+
+    <h4>Callback functions</h4>
+    <p>Simply put, as in the title, a callback function is a function that are executed when the function in use are finished</p>
+    <p>A good example in is the app.listen function in express, which takes a callback function (optionally) that executes after the server is setup</p>
+    <p>Another example which is commonly used are the fetch APIs callback when the fetch has happend. Here we get a promise in return and this promise can be used in 
+      by the .then function which is the callback function in this situation. Here we can unpack the ReadableStream of packages into JSON data and do stuff with it.
+    </p>
+    <img src="/img/node/javascript/example_fetchcall.png">
+    <p>Here we manipulate with the data we got in return which has been converted to json data. This is only possible because of the callback executing after we have fetched the data by the fetch function</p>
+    <p>More about the <strong>Fetch API</strong> below</p>
+
+    <h4>Function hoisting</h4>
+    <p>You may ask yourself <em>Where do we declare functions in the script?</em> and it is not actually necessary to declare them in an order where the functions come first.
+    We can use functions in the script before we even declare them. Hoisting is a term that describes how the intepreter inteprets statements and functions.
+    When we run a JavaScript script, the intepreter moves functions and declarations to the top of the their scope, prior to execution</p>
+
+    <h3>The Fetch API</h3>
+    <p>This is a API which you cannot avoid when coding in JavaScript and making client sided coding, this is the way of retrieving data in the browser</p>
+    <h4></h4>
+  </article>

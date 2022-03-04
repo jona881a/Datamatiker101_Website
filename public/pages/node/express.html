@@ -1,0 +1,82 @@
+<div class="row">
+  <article>
+  <h2>The Express Node Module </h2>
+  <p>In this secion we will cover everything related to the node module <em>express</em></p>
+
+  <h3>What is Express?</h3>
+  <p>Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications.</p>
+  <p>The framework provides mechanisms such as: </p>
+  <ul>
+    <li>
+      <p>Write handlers for requests with different HTTP verbs at different URL paths (routes).</p>
+    </li>
+    <li>
+      <p>Integrate with "view" rendering engines in order to generate responses by inserting data into templates.</p>
+    </li>
+    <li>
+      <p>Set common web application settings like the port to use for connecting, and the location of templates that are used for rendering the response.</p>
+    </li>
+    <li>
+      <p>Add additional request processing "middleware" at any point within the request handling pipeline.</p>
+    </li>
+  </ul>
+
+  <p>We often refere to frameworks as <em>opinionated or unopinionated</em>. In expresses case, it is unopinionated</p>
+  <p>Unopinionated frameworks, by contrast, have far fewer restrictions on the best way to glue components together to achieve a goal, or even what components should be used. </p>
+  <p>Express is unopinionated. You can insert almost any compatible middleware you like into the request handling chain, 
+    in almost any order you like. You can structure the app in one file or multiple files, and using any directory structure. 
+    You may sometimes feel that you have too many choices!
+  </p>
+  
+  <h3>How do we run an express server?</h3>
+  <p>If you have installed the framework dependencies you should be able to inmport it to your app.js (which is the file you will start your server from).
+    If not, then see the guide to <a href="/node/terminalcommands">install express </a> here
+  </p>
+  <p>The way we import is by using the require keyword and then using the import by stating express(). The express() function is a top-level function exported by the express module.</p>
+  <img src="/img/node/express/import_express.png">
+  <p></p>
+  <h4>Body Parsing</h4>
+  <p>Upon developing a <strong>Pure Data API</strong> you will discover that express doesn't use json per standard, This
+    whe need to tell express explicitly to use, just as we need to tell a fetch call in plain JavaScript that the promise we 
+    get needs to get parsed to JSON. This is called <strong>body parsing</strong> and this is done in express by calling app.use()
+  </p>
+  <img src="/img/node/express/bodyparsing.png">
+  <p>The reason for this lies in the <em>http protocol</em>. The way we send data through the <em>World Wide Web</em> is by sending packages in byte streams. Thats why when we examine a fetch promise, the type is a ReadableStream. More about <a href="#">http and OSI</a></p>
+
+  <h3>Serving static files to the client with express</h3>
+  <p>In express we can send files to the client to intepret simply by using the FileSystem module in Nodes own library which can access our filesystem, read files and send files.</p>
+  <p>So to send a file to the user, we call the newly imported fs and then, instead of saying app.send, we say app.sendFile with the __dirname/whatever path that we need.</p>
+  <img src="/img/node/express/sending_static_files.png">
+  <p>The __dirname is a environment variable that points to the users location of the node module in the project. This is brilliant, because if it was hardcoded from the root, we have had to change it each time another user would use our application </p>
+  <h4>Serving more than one file at a time</h4>
+  <p>By trying what we've learned by now we are only allowed to send one HTML file and even though we've linked to JavaScript and CSS documents like normally, they aren't send with the HTML document. Why?
+    Express has a build-in security measure, which denies other files to be send. To Tell which files Express is allowed to use and send to the client, we need the .use function again like so:
+  </p>
+  <img src="/img/node/express/sending_multiple_files.png">
+  <p>The express.static function is located in the node_module <em>serve static</em> and is used to allow Express access to a certain folder, which is the public folder. The public folder are also known as the clientfolder.
+  This is where all the files that are send to the client is located.
+  </p>
+  <img src="/img/node/express/publicfolder.png">
+
+  <h3>Running a NodeJS Express Server with Server Side Rendering</h3>
+  <p>Express have the capability of serverside rendering and in this section I will cover what it is and how to do it in express</p>
+  
+  <h4>What is Server Side Rendering (SSR)</h4>
+  <p>Server Side Rendering is the exact opposite of client sided rendering. When we discussed how to send static files to the client, we specifically discussed clientsided rendering.
+    Here, the server renders the files and inserts data before we send it to the client. So when we handle data in the browser, we don't make a fetch call, we send a request to the server to load the specific page with the specific data.
+  </p>
+
+  <h4>How do we then do SSR in Express?</h4>
+  <p>Its actually not Express that handles the SSR logic, it is Node, and that is very important to understand. Node has a build in module called FileSystem which lets you work with your filesystem.</p>
+  <p>In order to utilize Server Side rendering we firstly need to import it to our app.js</p>
+  <img src="/img/node/express/filesystem_import.png">
+  <p>Secondly we then use the fs instance to read our file by stating the path to the file. <strong>Important!</strong> Just as before with JSON, we need to specifically tell Node that we need it in a string format with the .toString(); method</p>
+  <img src="/img/node/express/filesystem_tostring.png">
+  <p>Now, we are ready to make use of SSR. The way we structure our files in SSR is by the hamburger principle. We have the top bun, the meat, and then the bottom bun. In HTML
+    that means we have the nav, the page content, and then the footer. These are called components which the website is build up upon.
+  </p>
+  <p>This allows us to reuse the HTML elements that we have made before, so the nav can be reused in every HTML document like on this site, instead of being copied onto every HTML document</p>
+  <img src="/img/node/express/components.png">
+  <p>And this is rendered alltogether by the server when the url to the get method is called</p>
+  <img src="/img/node/express/SSR.png">
+</article>

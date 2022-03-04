@@ -1,0 +1,32 @@
+Generel terminal commands
+The reason why we use terminal to navigate, create, remove etc. instead of just using the graphical interface is to get used to a server environment where no ui is present.
+An example of this are virtualmachines, you could use a program to connect to the vm with a desktop, but that is slow and unproductive.
+
+To change directory you use the cd command like so:
+cd desktop
+cd.. 
+
+To create a directory:
+mkdir dirname
+
+to create a file:
+touch file.extension
+
+Git commands
+The first thing we need to do to utilize git in our project is to either clone a repo from the github cloud or to initialize the folder you are located as a git project
+cloning:
+git clone "link to repo"
+git init (IMPORTANT! you have to be in the parent folder of your project, otherwise you could be pushing files which aren't suppose to go up to your github repository)
+
+Node commands
+The most important command to know in node is ofc to run a node project and can be done so:
+node app.js
+
+npm commands
+Node package manager are the inbuild tool in nodejs which can install all sorts of dependencies, like i stated in the node section of the website, 
+we use this to install express like so:
+npm install express
+this calls the npm website and installs all necessary files to run a full express nodejs backend.
+
+to install nodemon livereload server we run the command:
+npm install nodemon
