@@ -14,13 +14,13 @@
 <h4>Difference between Http and Https</h4>
 <p>The s in https stands for secure, which means that there is some sort of security measure taken when accessing the server with our client</p>
 <p>The browser has what is called and SSL/TLS (Secure Socket Layer/Transport layer security) certificate which are validated by what is called a CA authority. An example from W3schools.com</p>
-<img src="/img/node/restapi/w3schools_certificate.png">
+<img src="/pages/node/img_httpandrest/w3schools_certificate.png">
 <p>how it works under the hood is in short description by exchanging keypairs (public and private) and validating that the browser and server are what they say they are.
   For more info: look up TLS handshake explained
 </p>
 
 <h3>The Client Server model</h3>
-<img src="/img/node/restapi/Client-Server-model.png">
+<img src="/pages/node/img_httpandrest/Client-Server-model.png">
 <p>The client server model is a simple model when you look at the picture but under the hood, when you type https://google.com in the browser,
   there is much more going on than you actually realise.
 </p>
@@ -30,7 +30,7 @@
 
 <h3>How do we send data through the internet</h3>
 <h4>The OSI model</h4>
-<img src="/img/node/restapi/OSIModel.jpeg">
+<img src="/pages/node/img_httpandrest/OSIModel.jpeg">
 
 <h3>The REST convention and Pure Data API's</h3>
 <h4>Pure Data API and REST vs SSR</h4>
@@ -42,7 +42,7 @@
 <p>When designing a REST API we are talking about how the endpoints the user or client should look. 
   Heres a picture of how this could look with Memes as an example
 </p>
-<img src="/img/node/restapi/RESTAPIDesignMemes.png">
+<img src="/pages/node/img_httpandrest/RESTAPIDesignMemes.png">
 <p>Notice how we categorize by the resource Memes and in plural! Because we have more than one Meme.
   the id on the url are called a path variable. This variable is used to find a specific resource and do something with it.
   the questionmark is a query which means we are sending a variable to query a specific thing in the resouce.
@@ -62,34 +62,34 @@
 </ol>
 <p>In this example we use a array to simulate the database and instead of memes, it will be beers as a resource</p>
 <p>This is our initial data in the array</p>
-<img src="/img/node/httpandrest/array.png">
+<img src="/pages/node/img_httpandrest/array.png">
 
 <h4>GET requests</h4>
 <p>A GET request is either to get all the resources or a specific resourse specified with an id, as discussed before</p>
 
 <h5>GET all request</h5>
-<img src="/img/node/httpandrest/getall_request.png">
+<img src="/pages/node/img_httpandrest/getall_request.png">
 <p>The res.send sends JSON format array of beer objects. data is the key and the array of beers are the value</p>
 
 <h5>GET specific request</h5>
-<img src="/img/node/httpandrest/getspecific_request.png">
+<img src="/pages/node/img_httpandrest/getspecific_request.png">
 <p>In the url request we specify an id, and the /:id is what we call a path variable which we can get from the req.params.id
   and in order to validate we need to convert it to a number with the Number() function in JavaScript because JSON is only in string format
 </p>
 
 <h4>POST</h4>
-<img src="/img/node/httpandrest/post_request.png">
+<img src="/pages/node/img_httpandrest/post_request.png">
 <p>To create a new Beer object we simply type /beers but in order to POST a resource to the database, we need to either have a 
   frontend which allows us to create a JSON object or a endpoint testing client like postman.
 </p>
 <p>The JSON object is stored in the req variable holds the body we send with the request and like in the photo above we can access it and save it.</p>
-<img src="/img/node/httpandrest/current_id.png">
+<img src="/pages/node/img_httpandrest/current_id.png">
 <p>because we don't use a database, we need to increment an id someway just like the autoincrementation feature does in mysql.
   The variable starts at 3 because that is what we currently have in the database and just like a database we increment it when creating.
 </p>
 
 <h4>PATCH</h4>
-<img src="/img/node/httpandrest/patch_request.png">
+<img src="/pages/node/img_httpandrest/patch_request.png">
 <p>The patch request is a little bit trickier than the other requests to create in the backend because we only need to change specific elements of the object.</p>
 <p>We first use the findIndex method to find the beer with the specific index in the pathvaraible</p>
 <p>Then check if the index isn't returning -1, otherwise it would throw and error and then we change the object</p>
@@ -105,7 +105,7 @@
 </p>
 
 <h4>DELETE</h4>
-<img src="/img/node/httpandrest/delete_request.png">
+<img src="/pages/node/img_httpandrest/delete_request.png">
 <p>Just like the PATCH we first have to find the index of the requested object by using the pathvariable (converted to a number, otherwise it will throw an error)
   and if the index isn't -1, we use the splice method to remove it from the array (or delete it from our database)
 </p>
